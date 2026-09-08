@@ -1,3 +1,9 @@
-print(
-"start test"
+import pytest
+
+
+pytest.main(
+[
+"-v",
+"testcases"
+]
 )
