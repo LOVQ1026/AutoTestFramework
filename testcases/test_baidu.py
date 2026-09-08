@@ -1,10 +1,18 @@
 from selenium import webdriver
 
-def test_baidu():
-    driver=webdriver.Chrome()
+from common.driver import get_driver
+
+
+def test_baidu_title():
+
+    driver = get_driver()
 
     driver.get("https://www.baidu.com")
 
-    assert "百度" in driver.title
+    title = driver.title
+
+    print(title)
+
+    assert "百度" in title
 
     driver.quit()

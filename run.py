@@ -1,9 +1,14 @@
 import pytest
 
 
-pytest.main(
-[
-"-v",
-"testcases"
-]
-)
+
+if __name__ == "__main__":
+
+
+    pytest.main(
+        [
+            "-v",
+            "-s",
+            "testcases"
+        ]
+    )
