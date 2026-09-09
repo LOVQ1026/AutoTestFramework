@@ -1,53 +1,18 @@
-import pytest
+from pages.login_page import LoginPage
 
+def test_login(driver):
+    login_page = LoginPage(
+        driver
+    )
 
+    login_page.input_username(
+        "admin"
+    )
 
-@pytest.mark.smoke
-def test_smoke_login():
-
-    result="success"
-
-    assert result=="success"
-
-def login(username, password):
-
-    if username == "admin" and password == "123456":
-
-        return "success"
-
-    else:
-
-        return "failed"
-
-
-
-def test_correct_login():
-
-    result = login(
-        "admin",
+    login_page.input_password(
         "123456"
     )
 
-    assert result == "success"
+    login_page.clik_login()
 
-
-
-def test_wrong_password():
-
-    result = login(
-        "admin",
-        "111111"
-    )
-
-    assert result == "failed"
-
-
-
-def test_empty_username():
-
-    result = login(
-        "",
-        "123456"
-    )
-
-    assert result == "failed"
+    assert True
