@@ -1,0 +1,1 @@
+{'browser': 'chrome', 'base_url': 'https://www.baidu.com', 'login_url': 'https://practice.expandtesting.com/login', 'default_user': 'practice', 'default_pass': 'SuperSecretPassword!', 'timeout': {'implicit': 5, 'explicit': 10}}

@@ -1,0 +1,3 @@
+[32mINFO    [0m AutoTest:test_baidu.py:12 打开百度首页
+[32mINFO    [0m AutoTest:test_baidu.py:22 获取页面标题
+[32mINFO    [0m AutoTest:test_baidu.py:30 页面标题:百度一下，你就知道

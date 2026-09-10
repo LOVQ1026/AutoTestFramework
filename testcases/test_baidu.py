@@ -1,18 +1,35 @@
-from selenium import webdriver
+from common.logger import logger
+from common.config import get_config
 
-from common.driver import get_driver
 
 
-def test_baidu_title():
+def test_baidu_title(driver):
 
-    driver = get_driver()
 
-    driver.get("https://www.baidu.com")
+    config = get_config()
+
+
+    logger.info(
+        "打开百度首页"
+    )
+
+
+    driver.get(
+        config["base_url"]
+    )
+
+
+    logger.info(
+        "获取页面标题"
+    )
+
 
     title = driver.title
 
-    print(title)
+
+    logger.info(
+        f"页面标题:{title}"
+    )
+
 
     assert "百度" in title
-
-    driver.quit()

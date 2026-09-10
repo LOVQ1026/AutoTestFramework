@@ -17,19 +17,19 @@ class LoginPage(BasePage):
         "login"
     )
 
-    def input_username(self,name):
+    def input_username(self,username):
         self.input(
             self.username,
-            name
+            username
         )
 
-    def input_password(self,pwd):
+    def input_password(self,password):
         self.input(
             self.password,
-            pwd
+            password
         )
 
-    def clik_login(self):
+    def click_login(self):
         self.click(
             self.login_button
         )

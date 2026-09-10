@@ -1,0 +1,1 @@
+[33mWARNING [0m root:test_logger.py:13 这是测试警告

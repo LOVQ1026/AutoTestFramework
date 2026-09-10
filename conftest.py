@@ -1,25 +1,24 @@
 import pytest
-
-
-
-@pytest.fixture
-def browser():
-
-    print("\n打开浏览器")
-
-    yield
-
-
-    print("\n关闭浏览器")
-
-
+import allure
+from common.driver import create_driver
+from common.allure_helper import attach_screenshot
 
 @pytest.fixture
-def login():
+def driver():
+    driver = create_driver()
+    yield driver
+    driver.quit()
 
-    print("\n执行登录")
+@pytest.hookimpl(hookwrapper=True)
+def pytest_runtest_makereport(item, call):
+    outcome = yield
+    report = outcome.get_result()
+    if report.when == "call" and report.failed:
+        driver = item.funcargs.get(
+            "driver"
+        )
 
-    yield
-
-
-    print("\n退出登录")
+        if driver:
+            attach_screenshot(
+                driver
+            )
