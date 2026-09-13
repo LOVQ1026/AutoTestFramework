@@ -1,9 +1,8 @@
-def test_order(browser, login):
+def test_order(driver):
     print("开始测试下单")
+    assert driver is not None
 
-    assert True
 
-def test_logout(browser):
+def test_logout(driver):
     print("测试退出")
-
-    assert True
+    assert driver is not None

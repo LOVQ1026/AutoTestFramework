@@ -1,0 +1,15 @@
+login_cases:
+
+  - username: practice
+    password: SuperSecretPassword!
+    expected: success
+
+
+  - username: wrong_user
+    password: wrong_password
+    expected: failed
+
+
+  - username: test
+    password: 123456
+    expected: failed
