@@ -1,0 +1,81 @@
+name: AutoTest CI
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+  # 支持手动触发
+  workflow_dispatch:
+
+jobs:
+  test:
+    name: Run UI & API Tests
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. 拉取代码
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # 2. 安装 Python
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+
+      # 3. 安装项目依赖
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      # 4. 安装 Allure 命令行工具（用于生成 HTML 报告）
+      - name: Install Allure CLI
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y default-jre
+          wget https://github.com/allure-framework/allure2/releases/download/2.30.0/allure-2.30.0.tgz
+          tar -zxvf allure-2.30.0.tgz
+          sudo mv allure-2.30.0 /opt/allure
+          sudo ln -s /opt/allure/bin/allure /usr/local/bin/allure
+
+      # 5. 运行测试（无头模式）
+      - name: Run tests
+        env:
+          HEADLESS: "true"
+        run: |
+          pytest -v -s testcases --alluredir=reports/allure-results
+        continue-on-error: true  # 测试失败不中断 workflow，方便后续上传报告
+
+      # 6. 生成 Allure HTML 报告
+      - name: Generate Allure report
+        if: always()
+        run: |
+          allure generate reports/allure-results -o reports/allure-report --clean
+
+      # 7. 上传 Allure 结果（原始数据）为 Artifact
+      - name: Upload Allure results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: allure-results
+          path: reports/allure-results
+
+      # 8. 上传 Allure HTML 报告为 Artifact
+      - name: Upload Allure report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: allure-report
+          path: reports/allure-report
+
+      # 9. 部署到 GitHub Pages（可选，需要手动开启 Pages 权限）
+      - name: Deploy Allure report to GitHub Pages
+        if: always() && github.ref == 'refs/heads/main'
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: reports/allure-report
+          publish_branch: gh-pages
