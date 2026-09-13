@@ -1,0 +1,2 @@
+INFO     AutoTest:request.py:8 GET请求: https://api.github.com/user
+INFO     AutoTest:request.py:12 响应状态码: 401

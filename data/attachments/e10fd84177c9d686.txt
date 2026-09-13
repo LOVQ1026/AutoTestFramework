@@ -1,0 +1,2 @@
+INFO     AutoTest:test_logger.py:8 开始执行测试
+WARNING  AutoTest:test_logger.py:13 这是测试警告
