@@ -125,3 +125,16 @@ def test_login(driver):
 
 bash
 pytest -m smoke
+
+## 作者
+
+**LOVQ1026**
+
+- GitHub：https://github.com/LOVQ1026
+- 仓库：https://github.com/LOVQ1026/LovqTest
+
+---
+
+## License
+
+本项目仅用于学习与个人能力展示。
