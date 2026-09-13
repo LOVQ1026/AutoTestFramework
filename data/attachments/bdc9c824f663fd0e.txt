@@ -1,4 +1,3 @@
-WARNING  selenium.webdriver.common.selenium_manager:selenium_manager.py:138 Error sending stats to Plausible: error sending request for url (https://plausible.io/api/event)
 INFO     AutoTest:test_baidu.py:12 打开百度首页
 INFO     AutoTest:test_baidu.py:22 获取页面标题
 INFO     AutoTest:test_baidu.py:30 页面标题:百度一下，你就知道
